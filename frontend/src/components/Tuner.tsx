@@ -107,21 +107,21 @@ const Tuner = () => {
 
     return (
         <>
-            <div className='flex justify-center items-center gap-16 mt-8'>
+            <div className='flex flex-col md:flex-row justify-center items-center md:gap-16 md:mt-8'>
 
                 {/* Start/stop switch and tuner dial (left side) */}
-                <div className='flex flex-col justify-center items-center'>
+                    <div className='flex flex-col justify-center items-center -mt-4'>
 
-                    {OnOffSwitch(toggleRecording)}
+                        {OnOffSwitch(toggleRecording)}
 
-                    {TunerDialAndScreen(rotate, cents)}
+                        {TunerDialAndScreen(rotate, cents)}
 
-                </div>
+                    </div>
 
                 {/* String and note choice (Right side)*/}
-                <div className='w-[300px] mb-12'>
+                <div className='w-[300px] -mt-0 md:mt-0 md:mb-12 z-20'>
                     <div className='flex flex-col items-center'>
-                        <div className='flex h-[180px] w-[300px] bg-tabbi-dark-gray justify-center items-center'>
+                        <div className='flex h-[150px] w-[200px] md:h-[180px] md:w-[300px] bg-tabbi-dark-gray justify-center items-center'>
                             <p className='text-[150px] font-bold text-tabbi-secondary font-gridlite whitespace-pre'>
                                 {tuningNotes[tuningString]}
                             </p>
@@ -175,7 +175,7 @@ const TunerDialAndScreen = (rotate: number, cents: number | null) => {
     return (
         <>
             <p className={rotate > -3 && rotate < 3 ? 'text-4xl font-bold text-green-500' : 'text-4xl font-bold text-red-500'} >v</p>
-            <div className='relative w-96 h-96 z-0 overflow-hidden'>
+            <div className='relative size-50 md:size-96 z-0 overflow-hidden'>
                 <motion.img
                     className="w-full h-full"
                     src={dial}
@@ -187,7 +187,7 @@ const TunerDialAndScreen = (rotate: number, cents: number | null) => {
                 />
                 <div className='absolute inset-0 flex justify-center items-end z-10'>
                     <div className='flex flex-col items-center bg-tabbi-light-gray w-full h-1/2 justify-start'>
-                        <h1 className='flex justify-end items-center w-full h-20 mt-4 p-4 bg-tabbi-dark-gray text-[72px] font-bold text-tabbi-secondary font-gridlite'>
+                        <h1 className='flex justify-end items-center w-full h-15 md:h-20 md:mt-4 p-4 bg-tabbi-dark-gray text-[40px] md:text-[72px] font-bold text-tabbi-secondary font-gridlite'>
                             {!cents ? '' : cents > 0 ? '+' + cents.toFixed(1) :
                                 cents.toFixed(1)}
                         </h1>
@@ -202,13 +202,13 @@ const TunerDialAndScreen = (rotate: number, cents: number | null) => {
 const RadioNoteSelector = (value: string, id: string, note: string) => {
     return (
         <div className='flex flex-col justify-center items-center'>
-            <div className='w-[2px] h-12 bg-tabbi-dark-gray'> </div>
+            <div className='w-[2px] md:w-[2px] h-12 bg-tabbi-dark-gray'> </div>
             <RadioGroup.Item
-                className='w-[32px] h-[32px] border-2 border-tabbi-dark-gray rounded-full'
+                className='size-[22px] md:size-[32px] border-2 border-tabbi-dark-gray rounded-full'
                 value={value}
                 id={id}
             >
-                <RadioGroup.Indicator className='relative flex size-full items-center justify-center after:block after:size-[18px] after:rounded-full after:bg-tabbi-primary transition-all duration-[.2s]' />
+                <RadioGroup.Indicator className='relative flex size-full items-center justify-center after:block after:size-[15px] md:after:size-[18px] after:rounded-full after:bg-tabbi-primary transition-all duration-[.2s]' />
             </RadioGroup.Item>
             <label
                 className='text-xl'

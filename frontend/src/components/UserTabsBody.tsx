@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import * as Checkbox from "@radix-ui/react-checkbox"
 import { CheckIcon } from "@radix-ui/react-icons"
 import { type Metadata, type Upload } from '../utilities/Types'
+import TabView from './TabView'
 
 
 
@@ -57,25 +58,25 @@ const UserTabsBody: React.FC<UserTabsBodyProps> = ({ uploadedList, savedList, fe
                 <table className="table-fixed mt-2 border-collapse w-full p-3">
                     <thead className="bg-tabbi-dark-gray text-white ">
                         <tr>
-                            <th className="w-[35%] text-left pl-6 py-2">Title</th>
-                            <th className="w-[35%] text-left pl-6 py-2">Artist</th>
-                            <th className="w-[15%] text-center py-2">Public</th>
-                            <th className="w-[15%] text-center py-2">Saved</th>
+                            <th className="w-[40%] md:w-[35%] text-left pl-6 py-2">Title</th>
+                            <th className="w-[40%] md:w-[35%] text-left pl-6 py-2">Artist</th>
+                            <th className="w-[0%] md:w-[15%] text-center py-2 truncate">Public</th>
+                            <th className="w-[20%] md:w-[15%] text-center py-2">Saved</th>
                         </tr>
                     </thead>
                     <tbody>
                         {displayedList.map((upload, index) => (
                             <tr key={index}>
-                                <td className="border-b border-black pl-6 py-4">
+                                <td className="border-b border-black pl-6 py-4 truncate">
                                     <Link to={'/tab/' + upload.id + '?private=' + !upload.public}
                                         className="font-bold text-tabbi-primary hover:underline">{upload.title}</Link>
                                 </td>
-                                <td className="border-b border-black pl-6 py-4">{upload.artist}</td>
-                                <td className="border-b border-black text-center py-4">{upload.public ? 'yes' : 'no'}</td>
-                                <td className="border-b border-black text-center py-4">
+                                <td className="border-b border-black pl-6 py-4 truncate">{upload.artist}</td>
+                                <td className="border-b border-black text-center py-4 truncate">{upload.public ? 'yes' : 'no'}</td>
+                                <td className="border-b border-black text-center py-4 truncate">
                                     <Checkbox.Root
                                         className='flex size-[25px] appearance-none border border-black items-center justify-center mx-auto'
-                                        checked={true}
+                                        checked={ listView === 'saved' || savedList.some(saved => saved.id === upload.id )}
                                         id={index.toString()}
                                         onCheckedChange={() => {}}
                                     >
@@ -103,24 +104,24 @@ const UserTabsBody: React.FC<UserTabsBodyProps> = ({ uploadedList, savedList, fe
                 <table className="table-fixed mt-2 border-collapse w-full p-3">
                     <thead className="bg-tabbi-dark-gray text-white">
                         <tr>
-                            <th className="w-[30%] text-left pl-6 py-2">Title</th>
-                            <th className="w-[30%] text-left pl-6 py-2">Artist</th>
-                            <th className="w-[15%] text-center pl-6 py-2">Progress</th>
-                            <th className="w-[25%] text-center pl-6 py-2">Current process</th>
+                            <th className="w-[35%] md:w-[30%] text-left pl-6 py-2">Title</th>
+                            <th className="w-[35%] md:w-[30%] text-left pl-6 py-2">Artist</th>
+                            <th className="w-[30%] md:w-[15%] text-center pl-6 py-2">Progress</th>
+                            <th className="w-[0%] md:w-[25%] text-center pl-6 py-2 truncate">Current process</th>
                         </tr>
                     </thead>
                     <tbody>
                             <tr>
-                                <td className="border-b border-black pl-6 py-4">{'Never Ending Song'}</td>
-                                <td className="border-b border-black pl-6 py-4">{"The Man Who Wasn't There"}</td>
-                                <td className="border-b border-black text-center pl-6 py-4">{'3/5'}</td>
-                                <td className="border-b border-black text-center pl-6 py-4">{'transcribing tabs'}</td>
+                                <td className="border-b border-black pl-6 py-4 truncate">Never Ending Song</td>
+                                <td className="border-b border-black pl-6 py-4 truncate">The Man Who Wasn't There</td>
+                                <td className="border-b border-black text-center pl-6 py-4 truncate">3/5</td>
+                                <td className="border-b border-black text-center pl-6 py-4 truncate">transcribing tabs</td>
                             </tr>
                             <tr>
-                                <td className="border-b border-black pl-6 py-4">{'Helium'}</td>
-                                <td className="border-b border-black pl-6 py-4">{'Trainer'}</td>
-                                <td className="border-b border-black text-center pl-6 py-4">{'1/5'}</td>
-                                <td className="border-b border-black text-center pl-6 py-4">{'separating sources'}</td>
+                                <td className="border-b border-black pl-6 py-4 truncate">Helium Drone</td>
+                                <td className="border-b border-black pl-6 py-4 truncate">Trainer</td>
+                                <td className="border-b border-black text-center pl-6 py-4 truncate">1/5</td>
+                                <td className="hidden md:block border-b border-black text-center pl-6 py-4 truncate">separating sources</td>
                             </tr>
                     </tbody>
                 </table>

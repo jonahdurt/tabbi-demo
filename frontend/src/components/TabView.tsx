@@ -22,6 +22,10 @@ interface Tab {
     ascii: string
 }
 
+interface Tabs {
+    [key: string]: number[][];
+}
+
 interface AudioPlayerHandle {
     getCurrentTime: () => number | undefined;
 }
@@ -42,6 +46,68 @@ const TabView = () => {
 
 
     const [searchParams, setSearchParams] = useSearchParams()
+
+    const fullTabJson = "{'timestamps': ['2.043', '2.508', '2.972', '3.715', '4.180'], 'tabs': {'2.043': [(1, 22)], '2.508': [(2, 15)], '2.972': [(1, 13)], '3.715': [(1, 10)], '4.180': [(2, 8)]}, 'ascii': ['e------------', 'b------------', 'g------------', 'd----15-----8-', 'a--22---13-10---', 'E------------'], 'positions': {'2.043': 18, '2.508': 12, '2.972': 12, '3.715': 6, '4.180': 6}}"
+
+    const tabJson = "'2.043': [(1, 22)], '2.508': [(2, 15)], '2.972': [(1, 13)], '3.715': [(1, 10)], '4.180': [(2, 8)]"
+
+    const myTabs: Tabs = {
+        '2.022': [[4, 8]],
+        '2.530': [[4, 6]],
+        '3.026': [[3, 3]], 
+        '3.157': [[3, 4]],
+        '3.402': [[3, 5]],
+        '3.762': [[2, 5]],
+        '4.266': [[3, 3]],
+        '4.653': [[2, 3]],
+        '4.992': [[4, 6]],
+        '5.129': [[4, 5]],
+        '5.371': [[4, 3]],
+        '5.593': [[3, 3]],
+
+        '5.974': [[5, 5]],
+        '6.427': [[4, 8]],
+        '6.905': [[4, 6]],
+        '7.076': [[4, 7]],
+        '7.315': [[4, 8]],
+        '7.688': [[2, 8]],
+        '8.188': [[4, 6]],
+        '8.559': [[3, 7]],
+        '8.885': [[4, 10]],
+        '9.051': [[4, 8]],
+        '9.303': [[4, 6]],
+        '9.552': [[4, 7]],
+
+        '9.903': [[4, 8]],
+        '10.361': [[4, 6]],
+        '10.846': [[3, 3]], 
+        '11.017': [[3, 4]],
+        '11.241': [[3, 5]],
+        '11.608': [[2, 5]],
+        '12.115': [[3, 3]],
+        '12.496': [[2, 3]],
+        '12.808': [[4, 6]],
+        '12.994': [[4, 5]],
+        '13.241': [[4, 3]],
+        '13.478': [[3, 3]],
+
+        '13.825': [[5, 5]],
+        '14.301': [[4, 8]],
+        '14.783': [[4, 6]],
+        '14.964': [[4, 7]],
+        '15.191': [[4, 8]],
+        '15.547': [[2, 8]],
+        '16.034': [[4, 6]],
+        '16.430': [[3, 7]],
+        '16.738': [[4, 10]],
+        '16.925': [[4, 8]],
+        '17.160': [[4, 6]],
+        '17.407': [[4, 7]],
+    }
+
+    // const parsedTabs = JSON.parse(tabJson)
+
+    // console.log(parsedTabs)
 
     // Metadata
     const [artist, setArtist] = useState<string>('')
@@ -81,10 +147,14 @@ const TabView = () => {
 
     // }, [tabStrings])
 
-    const getTabFromJson = (tabString: string) => {
-        console.log(tabString)
-        const tabJson: Tab = JSON.parse(tabString)
-        const tabs = tabJson.tabs
+    useEffect (() => {
+        getTabFromJson(myTabs)
+    }, [])
+
+    const getTabFromJson = (tabs: Tabs) => {
+        // console.log(tabString)
+        // const tabJson: Tab = JSON.parse(tabString)
+        // const tabs = tabJson.tabs
         const keys: string[] = Object.keys(tabs)
         const lastTime: number = +keys[keys.length - 1]
 

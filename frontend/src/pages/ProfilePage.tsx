@@ -1,24 +1,21 @@
 import ProfileBody from '../components/ProfileBody'
 import profilePicture from '../assets/images/DefaultProfilePicture.svg'
+import PageTitle from '../components/PageTitle'
 
 const ProfilePage = () => {
 
     return (
         <>
-            <div className='mt-16 mb-10 mx-8 flex justify-between'>
-                <div>
-                    <div>
-                        <h1 className='text-5xl font-semibold mb-10'>
-                            Profile
-                        </h1>
-                        <ProfileBody
-                            username={"demo-user"}
-                            email={"user@tabbi-demo.com"}
-                            picture={profilePicture}
-                        />
-                    </div>
-                </div>
-            </div>
+                <PageTitle>
+                    Profile
+                </PageTitle>
+            <div className='mt-8 mx-8 flex flex-col justify-center items-center'>
+                <ProfileBody
+                    username={"demo-user"}
+                    email={"user@tabbi-demo.com"}
+                    picture={profilePicture}
+                />
+            </ div>
         </>
     )
 }

@@ -35,7 +35,7 @@ const ProfileBody: React.FC<ProfileBodyProps> = ({ username, email, picture }) =
             {isEditing ? (
                 <form onSubmit={submitForm}>
                     <div className='flex flex-col gap-8'>
-                        <div className='flex flex-row justify-center gap-10 align-center'>
+                        <div className='flex flex-col md:flex-row justify-center gap-10 align-center'>
                             <div className='mb-4'>
                                 <img
                                     src={picturePreview || picture || DefaultProfilePicture}
@@ -95,28 +95,28 @@ const ProfileBody: React.FC<ProfileBodyProps> = ({ username, email, picture }) =
                             </button>
                             <button
                                 className='h-10 px-3 font-bold bg-tabbi-primary border border-black text-tabbi-light-gray hover:bg-tabbi-dark-gray transition-all duration-[.25s]'
-                                onClick={() => {}}>
+                                onClick={() => setIsEditing(false)}>
                                 Cancel
                             </button>
                         </div>
                     </div>
                 </form>
             ) : (
-                <div className='flex flex-col items-start gap-8'>
-                    <div className='flex flex-row justify-center gap-10 items-center'>
+                <div className='flex flex-col items-center gap-8'>
+                    <div className='flex flex-col md:flex-row justify-center gap-10 items-center'>
                         <div>
                             <img src={picture || DefaultProfilePicture}
                                 alt='Profile'
                                 className='h-[150px] w-[150px] rounded-full'
                             />
                         </div>
-                        <div className='flex flex-col justify-center gap-4 text-3xl'>
+                        <div className='flex flex-col justify-center gap-4 text-md md:text-3xl'>
                             <div>
-                                <label>Email: </label>
+                                <label className='font-bold'>Email: </label>
                                 <span>{email}</span>
                             </div>
                             <div>
-                                <label>Display Name: </label>
+                                <label className='font-bold'>Display Name: </label>
                                 <span>{username}</span>
                             </div>
                         </div>
@@ -125,7 +125,12 @@ const ProfileBody: React.FC<ProfileBodyProps> = ({ username, email, picture }) =
                     <button
                         className='h-10 px-3 flex-grow-0 text-xl border border-black bg-tabbi-secondary hover:bg-tabbi-tertiary hover:text-tabbi-light-gray transition-all duration-[.2s]'
                         onClick={handleEditProfile}>
-                        Edit profile
+                        edit profile
+                    </button>
+                    <button
+                        className='h-10 px-3 flex-grow-0 text-xl border border-black bg-tabbi-primary text-white hover:bg-black hover:text-tabbi-light-gray transition-all duration-[.2s]'
+                        onClick={() => {}}>
+                        log out
                     </button>
                 </div>
             )}

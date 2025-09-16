@@ -29,7 +29,7 @@ const AudioUploadForm: React.FC<TabCreationProps> = ({ title, setTitle, artist, 
             <form onSubmit={submitForm}>
 
                 {/* Flex row */}
-                <div className='flex justify-center gap-12'>
+                <div className='flex flex-col md:flex-row justify-center md:gap-12'>
 
                     {/* Left column */}
                     <div className='flex flex-col justify-start'>

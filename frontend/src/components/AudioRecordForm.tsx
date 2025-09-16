@@ -160,7 +160,7 @@ const AudioRecordForm: React.FC<TabCreationProps> = ({ title, setTitle, artist, 
             <form onSubmit={submitForm}>
 
                 {/* Flex row */}
-                <div className='flex justify-center gap-12'>
+                <div className='flex flex-col md:flex-row justify-center md:gap-12'>
 
                     {/* Left column */}
                     <div className='flex flex-col justify-start'>
@@ -239,7 +239,7 @@ const AudioRecordForm: React.FC<TabCreationProps> = ({ title, setTitle, artist, 
                     <div className='w-[1px] bg-black'></div>
 
                     {/* Audio recorder */}
-                    <div className='m-4 flex flex-col justify-center gap-2'>
+                    <div className='m-4 flex flex-col justify-center self-center gap-2'>
                         <div className='flex gap-2 items-center'>
                             <button
                                 className={`h-8 w-16 border border-black disabled:border-tabbi-med-gray disabled:text-tabbi-med-gray disabled:hover:bg-tabbi-light-gray hover:cursor-pointer ${isRecording ? 'bg-tabbi-primary text-tabbi-light-gray' : 'bg-tabbi-light-gray hover:bg-tabbi-med-gray'}`}
@@ -272,38 +272,40 @@ const AudioRecordForm: React.FC<TabCreationProps> = ({ title, setTitle, artist, 
                         </div>
 
                         {/* Visualizer */}
-                        <div className='h-[150px] w-[500px] border border-black bg-tabbi-dark-gray'>
-                            {isRecording
-                                ?
-                                (
-                                    mediaRecorderRef.current &&
-                                    <>
-                                        <LiveAudioVisualizer
-                                            mediaRecorder={mediaRecorderRef.current}
-                                            width={500}
-                                            height={150}
-                                            barWidth={2}
-                                            gap={1}
-                                            barColor={'#b3de00'}
-                                        />
-                                    </>
-                                )
-                                :
-                                (
-                                    audioBlob &&
-                                    <>
-                                        <AudioVisualizer
-                                            ref={visualizerRef}
-                                            blob={audioBlob}
-                                            width={500}
-                                            height={150}
-                                            barWidth={2}
-                                            gap={1}
-                                            barColor={'#b3de00'}
-                                        />
-                                    </>
-                                )
-                            }
+                        <div className='h-[75px] w-[250px] md:h-[150px] md:w-[500px] border border-black bg-tabbi-dark-gray'>
+                            <div className='scale-50 md:scale-100 origin-top-left'>
+                                {isRecording
+                                    ?
+                                    (
+                                        mediaRecorderRef.current &&
+                                        <>
+                                            <LiveAudioVisualizer
+                                                mediaRecorder={mediaRecorderRef.current}
+                                                width={500}
+                                                height={150}
+                                                barWidth={2}
+                                                gap={1}
+                                                barColor={'#b3de00'}
+                                            />
+                                        </>
+                                    )
+                                    :
+                                    (
+                                        audioBlob &&
+                                        <>
+                                            <AudioVisualizer
+                                                ref={visualizerRef}
+                                                blob={audioBlob}
+                                                width={500}
+                                                height={150}
+                                                barWidth={2}
+                                                gap={1}
+                                                barColor={'#b3de00'}
+                                            />
+                                        </>
+                                    )
+                                }
+                            </div>
                         </div>
 
                     </div>
@@ -328,7 +330,7 @@ const AudioRecordForm: React.FC<TabCreationProps> = ({ title, setTitle, artist, 
                                     sideOffset={5}
                                 >
                                     Because this is a demo of the full site, tab creation isn't possible.
-                                    You can, however, record audio, view the wavefile, and download the recorded 
+                                    You can, however, record audio, view the wavefile, and download the recorded
                                     file above.
                                 </Tooltip.Content>
                             </Tooltip.Portal>

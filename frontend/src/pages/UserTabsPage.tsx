@@ -1,5 +1,6 @@
 import UserTabsBody from '../components/UserTabsBody'
 import { type Metadata, type Upload } from '../utilities/Types'
+import PageTitle from '../components/PageTitle'
 
 const UserTabsPage = () => {
 
@@ -17,21 +18,11 @@ const UserTabsPage = () => {
         { artist: "artist5", public: true, popularity: 1, title: "you", uploader: 6, id: '4', username: 'amanda' }
     ]
 
-    const loggedIn: boolean = true
-
     return (
         <>
-            <div className='mt-8 mb-10 mx-8 flex justify-between'>
-                <h1 className='text-5xl font-semibold'>
-                    My Tabs
-                </h1>
-                {/* <div>
-                    <AudioUploadDialog
-                        fetchUploaded={() => { }}
-                        disabled={!loggedIn}
-                    />
-                </div> */}
-            </div>
+            <PageTitle>
+                My Tabs
+            </PageTitle>
             <div>
                 <div className=''>
                     <UserTabsBody

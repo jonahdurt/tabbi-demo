@@ -1,0 +1,43 @@
+@import "tailwindcss";
+@custom-variant hover (&:hover);
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  @apply bg-tabbi-light-gray;
+}
+
+@font-face {
+  font-family: CascadiaMono;
+  src: url('./assets/fonts/CascadiaCode.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: gridlite-pe-variable;
+  src: url("https://use.typekit.net/mqx6jyd.css") format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@theme {
+    /* fonts */
+    --font-sans: CascadiaMono, "mono";
+    --font-gridlite: gridlite-pe-variable, "mono";
+
+    /* colors */
+    --color-tabbi-primary: #db2428;
+    --color-tabbi-secondary: #b3de00;
+    --color-tabbi-tertiary: #0060de;
+    --color-tabbi-light-gray: #e8eaec;
+    --color-tabbi-med-gray: #7c7f82;
+    --color-tabbi-dark-gray: #231f20;
+
+    /* shadows */
+    --drop-shadow-hard-md: 5px 5px 0px rgb(0 0 0 / 1.0);
+    --drop-shadow-hard-sm: 3px 3px 0px rgb(0 0 0 / 1.0);
+    --shadow-hard-md: 5px 5px 0px rgb(0 0 0 / 1.0);
+    --shadow-hard-sm: 3px 3px 0px rgb(0 0 0 / 1.0);
+}

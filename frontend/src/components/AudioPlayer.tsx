@@ -12,11 +12,6 @@ import bass from '../assets/audio/wide-awake/bass.wav'
 import drums from '../assets/audio/wide-awake/drums.wav'
 
 interface AudioPlayerProps {
-    originalSrc: string | null
-    otherSrc: string | null
-    vocalSrc: string | null
-    bassSrc: string | null
-    drumSrc: string | null
     onIsPlayingChange: (isPlaying: boolean) => void
 }
 
@@ -24,7 +19,7 @@ interface AudioPlayerHandle {
     getCurrentTime: () => number | undefined
 }
 
-const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(({ originalSrc = null, otherSrc = null, vocalSrc = null, bassSrc = null, drumSrc = null, onIsPlayingChange }, ref) => {
+const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(({ onIsPlayingChange }, ref) => {
 
 
     // Constants
@@ -105,7 +100,7 @@ const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(({ originalS
             if (drumSrcRef.current)
                 URL.revokeObjectURL(drumSrcRef.current)
         }
-    }, [originalSrc, otherSrc, vocalSrc, bassSrc, drumSrc])
+    }, [])
 
 
     // Used by parent component to get current time of audio playing

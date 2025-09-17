@@ -25,7 +25,6 @@ const AudioRecordForm: React.FC<TabCreationProps> = ({ title, setTitle, artist, 
     const visualizerRef = useRef<HTMLCanvasElement>(null)
 
     const ffmpegRef = useRef<FFmpeg | null>(null)
-    const [ffmpegLoading, setFFmpegLoading] = useState<boolean>(true)
 
     const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
 
@@ -38,7 +37,6 @@ const AudioRecordForm: React.FC<TabCreationProps> = ({ title, setTitle, artist, 
             } catch (error) {
                 console.error('Error loading FFmpeg:', error)
             } finally {
-                setFFmpegLoading(false)
             }
         }
 

@@ -13,7 +13,6 @@ const ProfileBody: React.FC<ProfileBodyProps> = ({ username, email, picture }) =
 
     // Form
     const [newUsername, setNewUsername] = useState<string>('')
-    const [picturePreview, setPicturePreview] = useState<string | null>(null)
 
 
     /**
@@ -38,7 +37,7 @@ const ProfileBody: React.FC<ProfileBodyProps> = ({ username, email, picture }) =
                         <div className='flex flex-col md:flex-row justify-center gap-10 align-center'>
                             <div className='mb-4'>
                                 <img
-                                    src={picturePreview || picture || DefaultProfilePicture}
+                                    src={DefaultProfilePicture}
                                     alt='Profile'
                                     className='mb-4 h-[150px] w-[150px] rounded-full'
                                 />

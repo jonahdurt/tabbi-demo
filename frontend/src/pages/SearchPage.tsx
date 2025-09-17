@@ -1,11 +1,9 @@
-import { Link, useSearchParams, useLocation } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import * as Checkbox from "@radix-ui/react-checkbox"
 import { CheckIcon } from "@radix-ui/react-icons"
 import { type Upload } from '../utilities/Types'
 
 const SearchPage = () => {
-
-    const location = useLocation()
 
     const [searchParams] = useSearchParams()
 
@@ -15,11 +13,6 @@ const SearchPage = () => {
         { title: `Hello ${searchQuery}`, artist: 'The Artist', public: true, popularity: 5, uploader: 10, id: '10', username: 'chris' },
         { title: `My Song`, artist: (searchQuery ? searchQuery : 'mystery'), public: true, popularity: 5, uploader: 10, id: '10', username: 'kaitlyn' }
     ]
-
-    // Checks if an upload is in a user's saved list of uploads
-    const isSaved = (targetId: string, searchedList: Upload[]): boolean => {
-        return searchedList.some(upload => upload.id == targetId)
-    }
 
     return (
         <>

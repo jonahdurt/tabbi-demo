@@ -74,10 +74,8 @@ const Tuner = () => {
 
     const updatePitch = (analyserNode: AnalyserNode, detector: PitchDetector<Float32Array>, input: any, sampleRate: number) => {
         analyserNode.getFloatTimeDomainData(input)
-        const [pitch, clarity] = detector.findPitch(input, sampleRate)
+        const [pitch, _] = detector.findPitch(input, sampleRate)
 
-        console.log(pitch)
-        console.log("pitch updated")
 
         if (pitch > 0) {
             const incomingCents: number = 1200 * Math.log2(pitch / tuningFreqRef.current)

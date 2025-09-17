@@ -14,7 +14,7 @@ interface TabCreationProps {
     submitForm: (e: FormEvent<HTMLFormElement>) => Promise<void>
 }
 
-const AudioUploadForm: React.FC<TabCreationProps> = ({ title, setTitle, artist, setArtist, publicState, setPublicState, file, setFile, submitForm }) => {
+const AudioUploadForm: React.FC<TabCreationProps> = ({ title, setTitle, artist, setArtist, publicState, setPublicState, setFile, submitForm }) => {
 
     // Selects file for upload
     const selectFile = (event: React.ChangeEvent<HTMLInputElement>) => {

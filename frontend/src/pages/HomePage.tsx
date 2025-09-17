@@ -20,14 +20,14 @@ const HomePage = () => {
 
     return (
         <>
-            <div className='flex flex-col md:flex-row w-full justify-between mt-6'>
-                <div className='flex flex-col md:w-2/5 pr-10 -mt-6'>
-                    <div className='md:-ml-6'>
+            <div className='flex flex-col md:flex-row w-full justify-between mt-6 gap-8 md:gap-0'>
+                <div className='flex flex-col md:w-2/5 md:pr-10 -mt-6'>
+                    <div className='-mb-3 md:-ml-6'>
                         <PageTitle>
                             Welcome to Tabbi!
                         </PageTitle>
                     </div>
-                    <p className='text-xl '>
+                    <p className='text-md md:text-xl'>
                         Your ultimate companion for mastering the guitar is here.
                         Effortlessly transform your favorite audio into accurate tabs with our automatic transcription feature.
                         Say goodbye to tedious manual notation and hello to instant playable arrangements.
@@ -38,20 +38,20 @@ const HomePage = () => {
                         Elevate your guitar skills and make practice more effective with Tabbi.
                     </p>
                 </div>
-                <div className='w-[1px] bg-black' />
-                <div className='flex flex-col gap-4 w-3/5 pl-10'>
+                <div className='hidden md:block w-[1px] bg-black' />
+                <div className='flex flex-col gap-4 md:w-3/5 md:pl-10'>
 
                     {/* Popular List */}
                     <div className="w-full">
-                        <h1 className='mb-5 text-3xl font-semibold w-full'>
-                            Most popular
+                        <h1 className='mb-5 text-2xl md:text-3xl font-semibold w-full'>
+                            Popular uploads
                         </h1>
                         <table className="my-5 w-full p-3 mb-10 table-fixed">
                             <thead className="bg-tabbi-dark-gray text-white w-full pr-4">
                                 <tr className='w-full'>
                                     <th className="w-[35%] text-left pl-6 py-2">Title</th>
                                     <th className="w-[40%] text-left px-6 py-2">Artist</th>
-                                    <th className="w-[25%] text-left self-right pr-6 py-2">Uploaded By</th>
+                                    <th className="w-[25%] text-left self-right pr-6 py-2">Uploader</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -71,7 +71,7 @@ const HomePage = () => {
 
                     {/* Recent List */}
                     <div className="w-full">
-                        <h1 className='mb-5 text-3xl font-semibold w-full'>
+                        <h1 className='mb-5 text-2xl md:text-3xl font-semibold w-full'>
                             Recent uploads
                         </h1>
                         <table className="my-5 w-full p-3 mb-10 table-fixed">
@@ -79,7 +79,7 @@ const HomePage = () => {
                                 <tr className='w-full'>
                                     <th className="w-[35%] text-left pl-6 py-2">Title</th>
                                     <th className="w-[40%] text-left px-6 py-2">Artist</th>
-                                    <th className="w-[25%] text-left self-right pr-6 py-2">Uploaded By</th>
+                                    <th className="w-[25%] text-left self-right pr-6 py-2">Uploader</th>
                                 </tr>
                             </thead>
                             <tbody>

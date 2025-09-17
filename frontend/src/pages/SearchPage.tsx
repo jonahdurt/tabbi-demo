@@ -23,30 +23,30 @@ const SearchPage = () => {
 
     return (
         <>
-            <h1 className='mt-8 mb-8 text-3xl font-semibold'>
+            <h1 className='mb-8 text-3xl font-semibold'>
                 Results for "{searchQuery}":
             </h1>
 
             <table className="table-fixed my-5 border-collapse w-full p-3 mb-10">
                 <thead className="bg-tabbi-dark-gray text-white">
                     <tr>
-                        <th className="w-[35%] text-left pl-6 py-2">Title</th>
-                        <th className="w-[35%] text-left pl-6 py-2">Artist</th>
-                        <th className="w-[15%] text-center py-2">Uploaded By</th>
-                        {<th className="w-[15%] text-center py-2">Saved</th>}
+                        <th className="w-[40%] md:w-[35%] text-left pl-6 py-2">Title</th>
+                        <th className="w-[40%] md:w-[35%] text-left pl-6 py-2">Artist</th>
+                        <th className="w-[0%] md:w-[15%] text-center py-2 truncate">Uploaded By</th>
+                        <th className="w-[20%] md:w-[15%] text-center py-2">Saved</th>
                     </tr>
                 </thead>
                 <tbody>
                     {resultsList.map((upload, index) => (
                         <tr key={index}>
-                            <td className="border-b border-black pl-6 py-4">
+                            <td className="border-b border-black pl-6 py-4 truncate">
                                 <Link to={'/tab/' + upload.id + '?private=' + !upload.public}
-                                    className="font-bold text-tabbi-primary hover:underline">{upload.title}</Link>
+                                    className="font-bold text-tabbi-primary hover:underline truncate">{upload.title}</Link>
                             </td>
                             <td className="border-b border-black pl-6 py-4">{upload.artist}</td>
-                            <td className="text-center border-b border-black py-4">{upload.username}</td>
+                            <td className="text-center border-b border-black py-4 truncate">{upload.username}</td>
                             {
-                                <td className="text-center border-b border-black py-4">
+                                <td className="text-center border-b border-black py-4 truncate">
                                     <Checkbox.Root
                                         className='flex size-[25px] appearance-none border border-black items-center justify-center mx-auto'
                                         checked={true}

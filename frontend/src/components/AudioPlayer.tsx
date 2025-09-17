@@ -7,9 +7,9 @@ import { AudioVisualizer } from 'react-audio-visualize'
 import { Slider, Tooltip } from "radix-ui"
 import original from '../assets/audio/wide-awake/original.mp3'
 import other from '../assets/audio/wide-awake/other.wav'
-import vocals from '../assets/audio/wide-awake/vocals.wav'  
-import bass from '../assets/audio/wide-awake/bass.wav'  
-import drums from '../assets/audio/wide-awake/drums.wav' 
+import vocals from '../assets/audio/wide-awake/vocals.wav'
+import bass from '../assets/audio/wide-awake/bass.wav'
+import drums from '../assets/audio/wide-awake/drums.wav'
 
 interface AudioPlayerProps {
     originalSrc: string | null
@@ -76,19 +76,19 @@ const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(({ originalS
     // Get blobs for audio storage and visualization
     useEffect(() => {
         const fetchAudio = async () => {
-                    const [res1, res2, res3, res4, res5] = await Promise.all([
-                        fetch(original).then(res => res.blob()),
-                        fetch(other).then(res => res.blob()),
-                        fetch(vocals).then(res => res.blob()),
-                        fetch(bass).then(res => res.blob()),
-                        fetch(drums).then(res => res.blob())
-                    ])
+            const [res1, res2, res3, res4, res5] = await Promise.all([
+                fetch(original).then(res => res.blob()),
+                fetch(other).then(res => res.blob()),
+                fetch(vocals).then(res => res.blob()),
+                fetch(bass).then(res => res.blob()),
+                fetch(drums).then(res => res.blob())
+            ])
 
-                    setOriginalBlob(res1)
-                    setOtherBlob(res2)
-                    setVocalBlob(res3)
-                    setBassBlob(res4)
-                    setDrumBlob(res5)
+            setOriginalBlob(res1)
+            setOtherBlob(res2)
+            setVocalBlob(res3)
+            setBassBlob(res4)
+            setDrumBlob(res5)
         }
 
         fetchAudio()
@@ -114,8 +114,9 @@ const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(({ originalS
             if (multitrackMode) {
                 return otherRef.current?.currentTime
             } else {
-                 return originalRef.current?.currentTime
-            }}
+                return originalRef.current?.currentTime
+            }
+        }
     }))
 
 
@@ -376,7 +377,6 @@ const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(({ originalS
         if (isLooping) {
             setIsLooping(false)
         } else {
-            const newTime = (loopStart / SLIDER_FIDELITY) * duration
             if (originalRef.current) {
                 if (originalRef.current.currentTime < (loopStart / SLIDER_FIDELITY) * duration || originalRef.current.currentTime > (loopEnd / SLIDER_FIDELITY) * duration) {
                     const newTime = (loopStart / SLIDER_FIDELITY) * duration
@@ -431,10 +431,36 @@ const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(({ originalS
     }
 
 
+
+    const smallScreenAudioControls = (id: string, volume: number) => {
+        return (
+            <div className='flex flex-col grow items-start justify-center border border-black px-2 pt-1 pb-2'>
+                <div className='flex w-full gap-1 justify-between items-center mb-1'>
+                    <img
+                        className='size-3'
+                        src={VolumeOnIcon}
+                    />
+                    <p className='text-sm'>
+                        {id}
+                    </p>
+                </div>
+                <input
+                    className='accent-tabbi-dark-gray w-full'
+                    id={id}
+                    type='range'
+                    value={volume * 100}
+                    max='100'
+                    onChange={handleVolumeChange}
+                />
+            </div>
+        )
+    }
+
+
     return (
         <>
             {/* Original / Multitrack options */}
-            <div className='flex items-center justify-start -z-50 ml-4 -mb-[1px]'>
+            <div className='flex items-center justify-start ml-4 -mb-[1px]'>
                 <div className='flex gap-4'>
                     <button
                         className={(!multitrackMode ? 'bg-tabbi-tertiary text-tabbi-light-gray border border-black' : 'bg-tabbi-light-gray border border-black text-black hover:bg-tabbi-med-gray') + ' font-bold py-2 px-4 focus:outline-none focus:shadow-outline'}
@@ -453,8 +479,8 @@ const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(({ originalS
                 </div>
             </div>
 
-            {/* Player main body */}
-            <div className='pt-6 pl-6 pr-6 pb-4 border border-black mb-4 z-50'>
+            {/* Large player main body */}
+            <div className='hidden lg:block pt-6 pl-6 pr-6 pb-4 border border-black mb-4'>
                 <div className='flex grow -mr-[6px]'>
                     {/* Play/pause and stop buttons */}
                     <div className='flex gap-2 mb-1 w-[15.8%] items-center'>
@@ -479,7 +505,6 @@ const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(({ originalS
                             <span>{formatTime(currentTime)}</span> / <span>{formatTime(duration)}</span>
                         </div>
 
-
                         <Slider.Root
                             className='relative flex h-5 w-full z-10 touch-none select-none items-center'
                             defaultValue={[0]}
@@ -498,29 +523,29 @@ const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(({ originalS
                             />
                         </Slider.Root>
                     </div>
-
                 </div>
 
                 {/* Audio track rows */}
                 <div className='flex flex-col grow mb-2'>
                     {originalSrcRef.current && !multitrackMode &&
-                        TrackRow('original', originalRef, original, handleLoadedMetadata, originalVolume, handleVolumeChange, currentTime, duration,
+                        TrackRow('original', originalRef, original, handleLoadedMetadata, originalVolume, handleVolumeChange,
                             visualizerRef, originalBlob, handleTimeUpdate, handleAudioEnded)}
                     {otherSrcRef.current && multitrackMode &&
-                        TrackRow('other', otherRef, other, handleLoadedMetadata, otherVolume, handleVolumeChange, currentTime, duration,
+                        TrackRow('other', otherRef, other, handleLoadedMetadata, otherVolume, handleVolumeChange,
                             visualizerRef, otherBlob, handleTimeUpdate, handleAudioEnded)}
                     {vocalSrcRef.current && multitrackMode &&
-                        TrackRow('vocal', vocalRef, vocals, handleLoadedMetadata, vocalVolume, handleVolumeChange, currentTime, duration,
+                        TrackRow('vocal', vocalRef, vocals, handleLoadedMetadata, vocalVolume, handleVolumeChange,
                             visualizerRef, vocalBlob, handleTimeUpdate, handleAudioEnded)}
                     {bassSrcRef.current && multitrackMode &&
-                        TrackRow('bass', bassRef, bass, handleLoadedMetadata, bassVolume, handleVolumeChange, currentTime, duration,
+                        TrackRow('bass', bassRef, bass, handleLoadedMetadata, bassVolume, handleVolumeChange,
                             visualizerRef, bassBlob, handleTimeUpdate, handleAudioEnded)}
                     {drumSrcRef.current && multitrackMode &&
-                        TrackRow('drum', drumRef, drums, handleLoadedMetadata, drumVolume, handleVolumeChange, currentTime, duration,
+                        TrackRow('drum', drumRef, drums, handleLoadedMetadata, drumVolume, handleVolumeChange,
                             visualizerRef, drumBlob, handleTimeUpdate, handleAudioEnded)}
 
                 </div>
 
+                {/* loop controls */}
                 <div className='flex grow -mt-2 -mr-[6px]'>
                     {/* Loop on/off button */}
                     <div className='flex gap-2 mb-1 w-[15.8%] items-center'>
@@ -579,13 +604,104 @@ const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(({ originalS
                     </div>
                 </div>
             </div>
+
+            {/* Small player main body */}
+            <div className='flex flex-col gap-5 lg:hidden p-6 border border-black mb-4'>
+                {/* buttons and time*/}
+                <div className='flex w-full justify-between'>
+                    <div className='flex gap-2 items-center'>
+                        <button onClick={togglePlayPause}>
+                            <img
+                                className='w-10 h-10 border border-black'
+
+                                src={isPlaying ? PauseButton : PlayButton}
+                            />
+                        </button>
+                        <button onClick={handleStop}>
+                            <img
+                                className='w-10 h-10 border border-black'
+                                src={StopButton}
+                            />
+                        </button>
+                        <div className='ml-1'>
+                            <span>{formatTime(currentTime)}</span> / <span>{formatTime(duration)}</span>
+                        </div>
+                    </div>
+                    <div className='flex gap-2 items-center'>
+                        <button
+                            className={`h-10 w-10 border border-black text-[14px] ${isLooping ? 'bg-tabbi-secondary' : 'bg-tabbi-light-gray'}`}
+                            onClick={toggleLooping}>
+                            loop
+                        </button>
+
+                    </div>
+                </div>
+
+                {/* time slider */}
+                <Slider.Root
+                    className='relative flex w-full z-10 mb-1 touch-none select-none items-center'
+                    defaultValue={[0]}
+                    max={SLIDER_FIDELITY}
+                    step={1}
+                    onValueChange={handleBarDrag}
+                    onPointerUp={handleBarRelease}
+                    onTouchEnd={handleBarRelease}
+                    value={[(currentTime / duration) * SLIDER_FIDELITY || 0]}
+                >
+                    <Slider.Track className='relative h-[5px] grow rounded-full bg-tabbi-dark-gray border border-black'>
+                        <Slider.Range className={`absolute h-full rounded-full bg-tabbi-primary `} />
+                    </Slider.Track>
+                    <Slider.Thumb
+                        className={`block size-4 rounded-full border border-black bg-tabbi-primary`}
+                    />
+                </Slider.Root>
+
+                {/* loop slider */}
+                <Slider.Root
+                    className='relative flex w-full z-10 touch-none select-none items-center'
+                    defaultValue={[0, SLIDER_FIDELITY]}
+                    max={SLIDER_FIDELITY}
+                    step={1}
+                    disabled={isLooping}
+
+                    minStepsBetweenThumbs={SLIDER_FIDELITY / 100}
+
+                    onValueChange={handleLoopBarDrag}
+                >
+                    <Slider.Track className='relative h-[5px] grow rounded-full bg-black border border-black'>
+                        <Slider.Range className={`absolute h-full rounded-full ${isLooping ? 'bg-tabbi-secondary' : 'bg-white'} `} />
+                    </Slider.Track>
+                    <Slider.Thumb
+                        className={`block size-4 rounded-full border border-black ${isLooping ? 'bg-tabbi-secondary' : 'bg-white'}`}
+                    />
+                    <Slider.Thumb
+                        className={`block size-4 rounded-full border border-black ${isLooping ? 'bg-tabbi-secondary' : 'bg-white'}`}
+                    />
+                </Slider.Root>
+
+                {/* audio controls */}
+                <div className='flex justify-start gap-2'>
+                    {originalSrcRef.current && !multitrackMode &&
+                        (<>
+                            {smallScreenAudioControls('original', originalVolume)}
+                            <div className='grow' />
+                        </>)}
+
+                    {otherSrcRef.current && multitrackMode && smallScreenAudioControls('other', otherVolume)}
+                    {vocalSrcRef.current && multitrackMode && smallScreenAudioControls('vocal', vocalVolume)}
+                    {bassSrcRef.current && multitrackMode && smallScreenAudioControls('bass', bassVolume)}
+                    {drumSrcRef.current && multitrackMode && smallScreenAudioControls('drum', drumVolume)}
+
+                </div>
+            </div>
         </>
 
     )
 })
 
+
 const TrackRow = (id: string, audioRef: React.MutableRefObject<HTMLAudioElement | null>, src: string, handleLoadedMetadata: () => void,
-    volume: number, handleVolumeChange: (e: React.ChangeEvent<HTMLInputElement>) => void, currentTime: number, duration: number,
+    volume: number, handleVolumeChange: (e: React.ChangeEvent<HTMLInputElement>) => void,
     visualizerRef: React.RefObject<HTMLCanvasElement | null>, blob: Blob | null | undefined, handleTimeUpdate: () => void, handleAudioEnded: () => void) => {
     return (
         <div className='flex mb-1'>
@@ -620,7 +736,7 @@ const TrackRow = (id: string, audioRef: React.MutableRefObject<HTMLAudioElement 
             </div>
 
             {/* Track audio visualization */}
-            <div className='flex flex-col w-5/6 -ml-[1px] border border-black'>
+            <div className='flex flex-col md:w-5/6 -ml-[1px] border border-black'>
                 {blob &&
                     <>
                         <AudioVisualizer

@@ -1,26 +1,11 @@
 import { useRef } from 'react'
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import * as Checkbox from "@radix-ui/react-checkbox"
 import { CheckIcon } from "@radix-ui/react-icons"
 // import 'react-h5-audio-player/lib/styles.css'
 import AudioPlayer from './AudioPlayer'
 import { AlertDialog } from 'radix-ui'
-
-interface GetUploadResponse {
-    artist: string
-    link: object
-    public: boolean
-    tabs: string
-    title: string
-    uploader: number
-}
-
-interface Tab {
-    timestamps: string[]
-    tabs: { [key: string]: number[][] }
-    ascii: string
-}
 
 interface Tabs {
     [key: string]: number[][];
@@ -34,27 +19,17 @@ const TabView = () => {
 
     // Constants
     const HIGHLIGHT_UPDATE_FREQUENCY = 100
-    const FONT_SIZE: number = 2
-    const FONT_LEADING: number = FONT_SIZE * 8
 
     // Reference to audio player element
     const audioPlayerRef = useRef<AudioPlayerHandle>(null)
 
     // URL params
-    const navigate = useNavigate()
     const params = useParams()
-
-
-    const [searchParams, setSearchParams] = useSearchParams()
-
-    const fullTabJson = "{'timestamps': ['2.043', '2.508', '2.972', '3.715', '4.180'], 'tabs': {'2.043': [(1, 22)], '2.508': [(2, 15)], '2.972': [(1, 13)], '3.715': [(1, 10)], '4.180': [(2, 8)]}, 'ascii': ['e------------', 'b------------', 'g------------', 'd----15-----8-', 'a--22---13-10---', 'E------------'], 'positions': {'2.043': 18, '2.508': 12, '2.972': 12, '3.715': 6, '4.180': 6}}"
-
-    const tabJson = "'2.043': [(1, 22)], '2.508': [(2, 15)], '2.972': [(1, 13)], '3.715': [(1, 10)], '4.180': [(2, 8)]"
 
     const myTabs: Tabs = {
         '2.022': [[4, 8]],
         '2.530': [[4, 6]],
-        '3.026': [[3, 3]], 
+        '3.026': [[3, 3]],
         '3.157': [[3, 4]],
         '3.402': [[3, 5]],
         '3.762': [[2, 5]],
@@ -80,7 +55,7 @@ const TabView = () => {
 
         '9.903': [[4, 8]],
         '10.361': [[4, 6]],
-        '10.846': [[3, 3]], 
+        '10.846': [[3, 3]],
         '11.017': [[3, 4]],
         '11.241': [[3, 5]],
         '11.608': [[2, 5]],
@@ -105,16 +80,10 @@ const TabView = () => {
         '17.407': [[4, 7]],
     }
 
-    // const parsedTabs = JSON.parse(tabJson)
-
-    // console.log(parsedTabs)
-
     // Metadata
-    const [artist, setArtist] = useState<string>('')
-    const [title, setTitle] = useState<string>('')
-    const [publicStatus, setPublicStatus] = useState<boolean>(false)
-    const uploaderRef = useRef<number | null>(null)
-    const [uploaderUsername, setUploaderUsername] = useState<string>('')
+    const artist = 'Parquet Courts'
+    const title = 'Wide Awake'
+    const publicStatus = true
 
     // Used to check whether this tab belongs to current viewer
     const [uploadIds, setUploadIds] = useState<string[]>([])
@@ -137,24 +106,11 @@ const TabView = () => {
     const intervalRef = useRef<number | null>(null)
     const [tabIndices, setTabIndices] = useState<number[]>([0, 0, 0, 0, 0, 0])
 
-    // /**
-    //  * Fetches and displays tab when page is loaded
-    //  */
-    // useEffect(() => {
-    //     if (searchParams.get('private') == 'false')
-    //         fetchPublicUpload()
-    //     else
-
-    // }, [tabStrings])
-
-    useEffect (() => {
+    useEffect(() => {
         getTabFromJson(myTabs)
     }, [])
 
     const getTabFromJson = (tabs: Tabs) => {
-        // console.log(tabString)
-        // const tabJson: Tab = JSON.parse(tabString)
-        // const tabs = tabJson.tabs
         const keys: string[] = Object.keys(tabs)
         const lastTime: number = +keys[keys.length - 1]
 
@@ -216,9 +172,7 @@ const TabView = () => {
                 formattedString = formattedString + '\n\n\n'
             }
         }
-
         setFormattedTab(formattedString)
-
     }
 
     const handleIsPlayingChange = (playing: boolean) => {
@@ -284,7 +238,7 @@ const TabView = () => {
         setTabIndices(indices)
     }
     return (
-        <div className='w-full'>
+        <div className='w-full flex flex-col'>
             <div className=''>
                 {/* Tab details */}
                 <div className='flex w-full justify-between items-end mt-10 mb-4'>
@@ -339,7 +293,7 @@ const TabView = () => {
                                             <AlertDialog.Action asChild>
                                                 <button
                                                     className='py-2 px-4 border border-black bg-tabbi-tertiary text-white hover:bg-tabbi-dark-gray transition-all duration-[.25s]'
-                                                    onClick={() => {}}>
+                                                    onClick={() => { }}>
                                                     {publicStatus
                                                         ?
                                                         'Yes, make it private'
@@ -366,13 +320,12 @@ const TabView = () => {
                     drumSrc={drumSrc}
                     onIsPlayingChange={handleIsPlayingChange}
                     ref={audioPlayerRef}
-
                 />
             </div>
 
             {/* Displayed tab */}
-            <div className='flex justify-center h-auto whitespace-pre text-2xl tracking-widest'>
-                <div className='px-16 py-12 border border-black bg-white'>
+            <div className='flex justify-center h-auto whitespace-pre text-[.8rem] sm:text-lg md:text-xl lg:text-2xl tracking-widest'>
+                <div className='px-2 py-2 sm:px-4 sm:py-6 md:px-12 md:py-8 lg:px-16 lg:py-12 border border-black bg-white'>
                     {isPlaying
                         ?
                         <>

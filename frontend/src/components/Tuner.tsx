@@ -119,7 +119,7 @@ const Tuner = () => {
                     </div>
 
                 {/* String and note choice (Right side)*/}
-                <div className='w-[300px] -mt-0 md:mt-0 md:mb-12 z-20'>
+                <div className='w-[300px] -mt-4 md:mt-0 md:mb-12 z-20'>
                     <div className='flex flex-col items-center'>
                         <div className='flex h-[150px] w-[200px] md:h-[180px] md:w-[300px] bg-tabbi-dark-gray justify-center items-center'>
                             <p className='text-[150px] font-bold text-tabbi-secondary font-gridlite whitespace-pre'>
@@ -202,7 +202,7 @@ const TunerDialAndScreen = (rotate: number, cents: number | null) => {
 const RadioNoteSelector = (value: string, id: string, note: string) => {
     return (
         <div className='flex flex-col justify-center items-center'>
-            <div className='w-[2px] md:w-[2px] h-12 bg-tabbi-dark-gray'> </div>
+            <div className='w-[2px] md:w-[2px] h-10 md:h-12 bg-tabbi-dark-gray'> </div>
             <RadioGroup.Item
                 className='size-[22px] md:size-[32px] border-2 border-tabbi-dark-gray rounded-full'
                 value={value}

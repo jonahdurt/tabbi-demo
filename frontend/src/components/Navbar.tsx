@@ -79,7 +79,7 @@ const Navbar = () => {
         <>
             <div className='bg-tabbi-light-gray w-full border-b border-black z-20'>
                 <WidthContainer>
-                    <div className="relative bg-tabbi-light-gray flex w-full items-center justify-between pt-4 pb-2 gap-6">
+                    <div className="relative bg-tabbi-light-gray flex w-full items-center justify-between pt-3 pb-2 md:pt-4 gap-6">
 
                         <Link to='/' className="flex flex-none items-center h-full md:mb-2">
                             <img src={logo} alt="Tabbi" className='min-w-18 md:min-w-24' />

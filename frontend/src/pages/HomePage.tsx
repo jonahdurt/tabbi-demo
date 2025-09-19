@@ -28,14 +28,13 @@ const HomePage = () => {
                         </PageTitle>
                     </div>
                     <p className='text-md md:text-xl'>
-                        Your ultimate companion for mastering the guitar is here.
-                        Effortlessly transform your favorite audio into accurate tabs with our automatic transcription feature.
-                        Say goodbye to tedious manual notation and hello to instant playable arrangements.
+                        Hi, I'm Jonah. This is a limited demo of a guitar-learning app that I helped build for my capstone project.
+                        The original site was taken offline due to backend server costs, so I built this frontend-only version to show off my personal contributions.
                         <br />
                         <br />
-                        But Tabbi is more than just tabs! We've created a comprehensive practice environment for guitarists of all levels.
-                        Use our built-in tuner and isolate instrument tracks with source separation while studying generated tabs.
-                        Elevate your guitar skills and make practice more effective with Tabbi.
+                        The full Tabbi site included automatic guitar tab generation, user accounts, a searchable library of user-uploaded content, and more. 
+                        You'll still find all of the original pages here, but some interactivity is missing as the backend has been replaced with static assets.
+                        Feel free to take a look around, and if you want to see more there's a link to my portfolio down in the footer. Cheers!
                     </p>
                 </div>
                 <div className='hidden md:block w-[1px] bg-black' />
